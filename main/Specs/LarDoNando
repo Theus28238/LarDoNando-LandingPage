@@ -1,0 +1,281 @@
+# Especificação do Projeto — Site Institucional "Lar do Nando"
+
+Projeto acadêmico
+
+## 1. Contexto e objetivo
+
+O Lar do Nando é uma ONG de proteção animal sediada em Teresina (PI), fundada por Fernando Machado e Leilyane Marques, formalizada em 17/03/2021 (CNPJ 41.794.269/0001-74). O abrigo funciona na residência dos fundadores, no Residencial Jacinta Andrade, Zona Norte de Teresina, e já resgatou mais de 200 animais, abrigando até 90 simultaneamente.
+
+O objetivo do projeto é desenvolver um site institucional ("sobre/institucional", não um e-commerce) que:
+
+- Apresente a história e a missão da ONG;
+- Explique o que a ONG faz e como atua;
+- Conte histórias reais de resgate (case de impacto);
+- Responda dúvidas frequentes do público;
+- Converta visitantes em doadores, voluntários ou adotantes, por meio de formulários de contato.
+
+Este documento usa como referência o material visual já produzido (telas de desktop, mobile e documentação de cores/tipografia) e organiza esse conteúdo em uma especificação que pode guiar a implementação.
+
+## 2. Público-alvo e tom de voz
+
+- Público: moradores de Teresina interessados em adotar, doar ou ser voluntários; pessoas que encontraram um animal ferido na rua; parceiros (veterinários, SEMARH-PI).
+- Tom: acolhedor, emocional mas direto, sem infantilizar — transmitir confiança (uso de dados concretos: CNPJ, números de animais, valores).
+
+## 3. Escopo do projeto
+
+### Dentro do escopo
+
+1. Página inicial (Home) com todas as seções institucionais.
+2. Página de "história de caso" (template reutilizável, ex.: História da Michele).
+3. Seção/página de Apoio com 3 formulários (Doação, Voluntariado, Adoção).
+4. Versão responsiva (mobile).
+5. Aplicação de um design system simples (cores + tipografia).
+
+### Fora do escopo (a menos que o professor peça)
+
+- Backend real de pagamento (a doação é só "chave PIX + QR Code" estático).
+- Login de usuário / área administrativa.
+- CMS dinâmico (o conteúdo pode ser estático/hardcoded).
+
+## 4. Arquitetura de informação (Sitemap)
+
+```
+Home (/)
+ ├─ 01 Hero
+ ├─ 02 Conheça nossa história (Sobre nós)
+ ├─ 03 O que fazemos
+ ├─ 04 Caso real — História da Michele (pode ser âncora na Home ou página própria /historias/michele)
+ ├─ 05 Perguntas frequentes (FAQ)
+ └─ 06 Apoie o Lar do Nando (Doação | Voluntário | Adoção)
+Footer (presente em todas as páginas)
+```
+
+Menu de navegação (topo): Sobre nós · O que fazemos · Por que fazemos · Como fazemos · O que já fizemos · Apoio — mais um CTA fixo "Quero ajudar" (botão amarelo).
+
+No mobile o menu vira hambúrguer; o CTA "Ajudar" fica visível ao lado da logo.
+
+## 5. Especificação das seções da Home
+
+### 5.1 Header
+
+- Logo "LAR DO NANDO" (texto, caixa alta).
+- Menu horizontal com os 6 itens acima (desktop) / hambúrguer (mobile).
+- Fundo transparente sobre o hero, azul profundo sólido ao rolar a página (opcional).
+
+### 5.2 Hero
+
+- Imagem de fundo: foto do cachorro (Nando), com overlay azul escuro para dar contraste ao texto.
+- Eyebrow: "Desde 2021 salvando vidas".
+- Título (H1, fonte serifada): "Lar do Nando é mais que um abrigo, é um refúgio de amor".
+- Dois CTAs: botão secundário contornado "Conheça nossa história" (rola até seção 01) e botão primário amarelo "QUERO AJUDAR" (rola até seção 06/Apoio).
+- No mobile: imagem menor, botões empilhados, e um bloco de estatísticas logo abaixo (200+ resgatados / 90 no abrigo / 2021 desde).
+
+### 5.3 Seção 01 — Conheça nossa história
+
+- Eyebrow numerado: "01 — CONHEÇA NOSSA HISTÓRIA".
+- Título: "Um casal, um sonho e mais de 200 vidas transformadas".
+- Texto (resumo): Fernando Machado (vigia) e Leilyane Marques (professora) nunca planejaram ter um abrigo; começou de forma espontânea no Residencial Jacinta Andrade, Zona Norte de Teresina; formalizado como ONG em 17/03/2021 (CNPJ 41.794.269/0001-74); hoje abriga até 90 animais simultaneamente, com apoio de voluntários, parceiros veterinários e da SEMARH-PI.
+- Duas fotos dos fundadores com os animais, em composição sobreposta.
+- Versão mobile: texto resumido com "Continuar lendo", fotos reduzidas a uma, dados-chave em "chips" (Desde 17/03/2021 · ONG registrada · Até 90).
+
+### 5.4 Seção 02 — O que fazemos
+
+- Eyebrow: "02 — O QUE FAZEMOS". Título: "Cuidado de verdade, do resgate ao novo lar". Subtítulo: "Seis frentes de trabalho que mantêm o abrigo funcionando todos os dias."
+- Grid de 6 cards (1 destaque grande + 5 menores):
+
+1. **Resgate de emergência** (card grande, escuro, tag "Emergência"): "Priorizamos cães atropelados, gravemente feridos, debilitados ou em risco imediato de vida nas ruas de Teresina." Estatística: **200+** animais resgatados desde 2021.
+2. **Cuidado veterinário**: cirurgias, transfusões de sangue, internações e tratamentos longos — como o caso da Michele. Link "Ver a história da Michele".
+3. **Adoção responsável** (card amarelo, destaque): conecta animais recuperados com famílias comprometidas. Botão "Quero adotar".
+4. **Abrigo na própria casa**: animais vivem na residência dos fundadores enquanto se recuperam e aguardam adoção, com cuidado 24h. Tag "Até 90 animais".
+5. **Castração gratuita**: parceria com a SEMARH-PI para controlar a reprodução irresponsável. Tag "25+ castrações feitas".
+6. **Rede de voluntários**: coordenação de voluntários para banho, alimentação, medicação e limpeza diária. Link "Quero ser voluntário".
+
+### 5.5 Seção 03/04 — Caso real: História da Michele (template de "história de resgate")
+
+Esta seção pode ser destacada na Home e/ou virar uma página própria reutilizável para outros casos futuros.
+
+- Breadcrumb: "Início / Histórias / Michele" com link "Voltar para o início".
+- Eyebrow: "UM CASO REAL". Título: "A história da Michele".
+- Texto: "Resgatada após um acidente grave, ela precisou de muito mais que um abrigo. Precisou de uma comunidade inteira."
+- Comparador de foto **Antes / Depois** com toggle "No resgate" / "Hoje" (tag "Tratamento 100% custeado").
+- CTAs: "Quero ajudar" (amarelo) e "Ver a jornada ↓" (contornado).
+- Faixa de estatísticas: **2** transfusões de sangue · **3** cirurgias · **\~2** meses de internação · **R$ 6 mil** cobertos por doações.
+- Timeline "A jornada — Do resgate à recuperação" com 5 marcos: (1) Resgate de emergência — atendimento urgente após o acidente; (2) Duas transfusões — para estabilizar o quadro; (3) Três cirurgias — pagas com ajuda da comunidade; (4) Quase 2 meses internada — cuidado diário até voltar ao abrigo; (5) Hoje — \[como ela está agora\], com ícone de coração. Legenda: "Cada etapa só foi possível porque alguém decidiu ajudar."
+
+### 5.6 Seção 05 — Perguntas frequentes (FAQ)
+
+- Eyebrow: "DÚVIDAS FREQUENTES". Título: "Perguntas que sempre nos fazem". Subtítulo: "Respostas rápidas antes de adotar, ajudar ou pedir socorro por um animal."
+- Botão de destaque: "Falar com a gente" (WhatsApp da ONG).
+- Grid de 8 perguntas/respostas (algumas com tag "Confirmar com a ONG" indicando dado a validar com o cliente real):
+
+1. Como funciona a adoção? — conecta recuperados com famílias comprometidas, buscando lar seguro e definitivo. \[placeholder: descrever etapas — formulário, visita, termo\].
+2. Encontrei um animal ferido. O que faço? — avisar pelo WhatsApp da ONG; a gravidade do caso é avaliada antes do atendimento.
+3. Como posso ser voluntário? — voluntários ajudam com banho, alimentação, medicação e limpeza diariamente; inscrição pelo canal de contato.
+4. Para onde vão as doações? — cuidado veterinário (cirurgias, transfusões, internações), alimentação e dia a dia do abrigo; ex.: tratamento da Michele (\~R$ 6.000) foi 100% coberto por doações da comunidade.
+5. O Lar do Nando é uma ONG registrada? — sim, formalizada em 17/03/2021, CNPJ 41.794.269/0001-74.
+6. Quantos animais vocês abrigam? — até 90 simultaneamente; mais de 200 resgatados desde a formalização.
+7. Onde fica o abrigo? Posso visitar? — funciona na casa dos fundadores, no Residencial Jacinta Andrade, Zona Norte; \[placeholder: informar se aceitam visitas, dias e horários\].
+8. Vocês fazem castração gratuita? — sim, em parceria com a SEMARH-PI, para controlar a reprodução irresponsável.
+
+### 5.7 Seção 06 — Apoie o Lar do Nando
+
+Layout: menu lateral de abas (Doação · Voluntário · Adoção) + card de formulário dinâmico à direita (no mobile, abas horizontais acima do formulário).
+
+**Aba Doação — "Doe pelo PIX"**
+
+- Texto: "Use a chave CNPJ para doar pelo PIX e ajudar a manter o Lar do Nando em atividade."
+- QR Code de pagamento.
+- Passo a passo numerado (1–6): abrir o app do banco → entrar na área PIX → escolher pagar por QR Code ou usar a chave CNPJ → inserir o valor desejado → conferir os dados do favorecido → confirmar a doação no aplicativo.
+- Campo "Tipo de chave": CNPJ. Campo "Chave PIX": 41.794.269/0001-74 com botão "Copiar".
+- Favorecido: Lar do Nando — ONG de Proteção Animal.
+
+**Aba Voluntário — "Inscrição de voluntário"**
+
+- Intro: "Preencha os dados abaixo para se inscrever como voluntário no Lar do Nando. Vamos entrar em contato para conversar sobre sua participação."
+- Dados pessoais: Nome completo\* · E-mail\* · Telefone/WhatsApp\* · Cidade\* · Bairro.
+- Disponibilidade: Dias da semana\* (texto livre, ex. "Segunda, quarta e sábado") · Período\* (texto livre, ex. "Manhã, tarde ou ambos").
+- Áreas de colaboração (checkboxes, múltipla escolha): Alimentação · Banho · Limpeza · Apoio à medicação (sob orientação) · Divulgação/adoção.
+- Experiência ou observações (opcional) — textarea.
+- Bloco de consentimento: "Ao enviar esta inscrição, você manifesta interesse em colaborar como voluntário no Lar do Nando e concorda em receber contato da equipe para conversar sobre sua participação, orientações iniciais e disponibilidade."
+- Botão: "Enviar inscrição".
+- Nota: "\* Campos obrigatórios. Não envie documentos sensíveis. O abrigo entrará em contato para conversar sobre sua participação."
+
+**Aba Adoção — "Interesse em adoção"**
+
+- Intro: "Conte um pouco sobre você e o animal que deseja adotar. O abrigo entrará em contato para conversar sobre a visita."
+- Dados pessoais: Nome completo\* · E-mail\* · Número de contato (telefone/WhatsApp)\* · Cidade\* · Bairro.
+- A visita: Data desejada para visita\* (DD/MM/AAAA) com aviso "A data informada é uma preferência e será confirmada pelo abrigo após contato."
+- Características do animal que deseja adotar\* — textarea (ex.: porte médio, adulto, calmo, bom com crianças, convivência com outros animais).
+- Sobre o lar e a rotina (opcional) — textarea (ex.: casa com quintal, tempo de convivência diária, rotina de trabalho, outros animais em casa).
+- Botão: "Solicitar visita".
+- Nota: "\* Campos obrigatórios. O envio registra seu interesse e não confirma uma adoção ou visita automaticamente." + "Processo de adoção, disponibilidade de visitas, dias e horários: a confirmar com a ONG."
+
+### 5.8 Footer
+
+- Logo "LAR DO NANDO" + repetição do menu principal.
+- Linha final: "Lar do Nando • Teresina, Piauí • CNPJ 41.794.269/0001-74".
+
+## 6. Responsividade / Mobile
+
+Referências de wireframe mobile indicam estas adaptações principais:
+
+- **Home mobile**: hero com foto menor e botões empilhados na primeira tela; bloco de estatísticas (200+ / 90 / 2021) logo abaixo do hero.
+- **Nossa história mobile**: texto resumido com "Continuar lendo"; fotos sobrepostas viram uma única foto; dados viram chips horizontais.
+- **História da Michele mobile**: foto única com toggle Resgate/Hoje; botão "Quero ajudar" fixado próximo ao topo do card; estatísticas em cards de 2–3 colunas roláveis.
+- **Formulários mobile**: campos empilhados em largura total; abas (Doação/Voluntário/Adoção) em linha horizontal rolável no topo do card.
+- Breakpoint sugerido: 1 coluna até \~768px; grid de 2–3 colunas acima disso (ajustar conforme a ferramenta usada).
+
+## 7. Design System
+
+### 7.1 Paleta de cores (por função, não por escala uniforme)
+
+| Grupo | Cor principal | Uso |
+| --- | --- | --- |
+| Azuis profundos | #0B3B5F | Fundos, rodapé, cartões escuros, texto sobre amarelo |
+| Azuis de ação | #1D4ED8 | Ícones, indicadores, identidade, bordas de destaque |
+| Azuis de leitura | #2F5A7A | Textos secundários, legendas, apoio |
+| Azuis suaves | #93C5FD | Textos em fundos escuros, bordas, conexões da jornada |
+| Superfícies/neutros | #F0F7FF | Fundos claros, cartões brancos (#FFFFFF) |
+| Amarelo | #FACC15 | Botões de CTA primário e seleção ativa |
+| Verde de apoio | #10B981 | Sinalização pontual (ícones), não usado para certificações |
+
+Observação: usar texto azul-escuro (não branco) sobre fundo amarelo, por contraste.
+
+### 7.2 Tipografia
+
+- **Fraunces** (serifada) — títulos e números de destaque (ex. "200+", "Cada vida importa"). Pesos: Regular 400, SemiBold 600, Bold 700, Black 900.
+- **Nunito** (sem serifa) — textos, menus, botões e formulários. Pesos: Regular 400, SemiBold 600, Bold 700, ExtraBold 800, Italic 400 (uso raro).
+
+### 7.3 Componentes reutilizáveis a implementar
+
+- Botão primário (amarelo, texto escuro), botão secundário (contornado), botão em fundo escuro.
+- Card de serviço (ícone + título + texto + tag opcional).
+- Card de estatística (número grande em Fraunces + legenda).
+- Badge/tag (ex. "Emergência", "Confirmar com a ONG", "25+ castrações feitas").
+- Timeline horizontal com marcos numerados.
+- Abas (tabs) para alternar formulários.
+- Campo de formulário com label, placeholder e asterisco de obrigatório.
+
+## 8. Requisitos técnicos sugeridos
+
+A stack definida para este projeto é **React + Tailwind CSS**. Esta seção descreve a arquitetura de componentes e a configuração do Tailwind; o passo a passo de implementação segue o modelo **Spec-Driven Development (SDD)**, detalhado na seção 11.
+
+### Arquitetura de componentes (React)
+
+```
+src/
+ ├─ components/
+ │   ├─ layout/        (Header, Footer, Nav)
+ │   ├─ ui/             (Button, Badge, Card, Tabs, Timeline, StatCard, FaqItem, FormField)
+ │   └─ sections/       (Hero, AboutSection, WhatWeDoSection, CaseStudySection, FaqSection, SupportSection)
+ ├─ data/              (services.js, faq.js, stats.js — conteúdo estático)
+ ├─ pages/             (Home.jsx e, opcionalmente, CaseStudy.jsx)
+ ├─ App.jsx
+ └─ main.jsx
+```
+
+### Tailwind — tokens de design
+
+Estender `tailwind.config.js` com as cores da seção 7.1 (ex.: `azul-profundo: '#0B3B5F'`, `azul-acao: '#1D4ED8'`, `azul-leitura: '#2F5A7A'`, `azul-suave: '#93C5FD'`, `amarelo: '#FACC15'`, `verde-apoio: '#10B981'`) e as famílias tipográficas `Fraunces` e `Nunito` (importadas via Google Fonts no `index.html`).
+
+### Formulários e estado
+
+- Abas (Doação / Voluntário / Adoção) controladas por `useState` em `SupportSection`.
+- Campos controlados com `useState` ou `react-hook-form`; validação client-side dos campos obrigatórios (\*).
+- Sem backend no escopo: o envio pode exibir uma mensagem de sucesso simulando o envio.
+
+### Bibliotecas sugeridas
+
+- `react-router-dom` (se a história da Michele virar rota própria) ou âncoras nativas para navegação por seção.
+- `lucide-react` para ícones.
+- `qrcode.react` para gerar o QR Code do PIX a partir da chave copia-e-cola.
+
+## 9. Conteúdo e assets necessários (checklist)
+
+- [ ] Texto final de cada seção (revisado, sem \[placeholders\]).
+- [ ] Fotos: hero (cão), fundadores com animais (2), foto "no resgate" e "hoje" da Michele, foto de animal adotado.
+- [ ] Confirmar com a ONG os itens marcados "Confirmar com a ONG" no FAQ (processo de adoção, visitas, canal de contato do voluntariado).
+- [ ] Número de WhatsApp oficial da ONG.
+- [ ] Chave PIX / QR Code definitivos.
+- [ ] Logo em arquivo vetorial, se existir.
+
+## 10. Critérios de aceite
+
+- Todas as 6 seções da Home implementadas e navegáveis por âncora a partir do menu.
+- Os 3 formulários (Doação, Voluntário, Adoção) funcionando com alternância por abas e validação de campos obrigatórios.
+- Layout responsivo funcionando em pelo menos 2 breakpoints (mobile e desktop).
+- Paleta de cores e tipografia (Fraunces + Nunito) aplicadas de forma consistente.
+- Página ou seção de "história de caso" (Michele) implementada como template reutilizável.
+- Footer com CNPJ e localização presentes em todas as páginas.
+
+## 11. Metodologia: Spec-Driven Development (SDD)
+
+Este projeto segue o modelo **Spec-Driven Development**: a especificação vem antes do código, e a implementação é guiada por ela em etapas validáveis.
+
+### 11.1 Spec — O que construir
+
+A especificação funcional está nas seções 1 a 7 deste documento: objetivo, escopo, sitemap, conteúdo de cada seção da Home, responsividade e design system. Qualquer dúvida de conteúdo deve ser resolvida aqui antes de codar.
+
+### 11.2 Plan — Como construir
+
+O plano técnico está na seção 8: stack (React + Tailwind), arquitetura de componentes, tokens de design e bibliotecas. Esse plano traduz a spec em decisões de implementação.
+
+### 11.3 Tasks — Decomposição em tarefas
+
+Cada tarefa deve ser pequena, testável e encerrar com a seção/funcionalidade visualmente conferida contra a spec.
+
+1. **Setup do projeto** — Vite + React + Tailwind; configurar fontes (Fraunces/Nunito) e cores no `tailwind.config.js`.
+2. **Layout base** — Header com nav responsivo (hambúrguer no mobile) e Footer.
+3. **Hero** — imagem de fundo, overlay, título, CTAs.
+4. **Seção "Conheça nossa história"** — texto + fotos sobrepostas (desktop) / resumo em chips (mobile).
+5. **Seção "O que fazemos"** — grid de 6 cards (componente `Card` reutilizável).
+6. **Componente "História de caso"** — toggle Resgate/Hoje, faixa de estatísticas, timeline da jornada (reutilizável para futuros casos).
+7. **Seção FAQ** — grid de perguntas/respostas com tags opcionais.
+8. **Seção Apoio** — Tabs + 3 formulários (Doação/PIX com QR Code, Voluntário, Adoção) com validação dos campos obrigatórios.
+9. **Responsividade** — conferir todos os breakpoints contra os wireframes mobile.
+10. **Acessibilidade básica** — contraste de texto sobre amarelo/azul, `alt` em imagens, `label` em todos os campos de formulário.
+11. **Deploy** (opcional) — publicar em Vercel ou Netlify para entrega.
+
+### 11.4 Verification — Validação final
+
+Antes de entregar, revisar cada tarefa contra os critérios de aceite da seção 10. Cada task só é considerada concluída quando confere com a spec correspondente, fechando o ciclo Spec → Plan → Tasks → Verification.

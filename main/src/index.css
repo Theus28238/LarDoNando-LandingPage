@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-azul-profundo: #0b3b5f;
+  --color-azul-acao: #1d4ed8;
+  --color-azul-leitura: #2f5a7a;
+  --color-azul-suave: #93c5fd;
+  --color-superficie: #f0f7ff;
+  --color-amarelo: #facc15;
+  --color-verde-apoio: #10b981;
+
+  --font-serif: 'Fraunces', serif;
+  --font-sans: 'Nunito', sans-serif;
+}
+
+body {
+  @apply bg-white font-sans text-azul-profundo antialiased;
+}
